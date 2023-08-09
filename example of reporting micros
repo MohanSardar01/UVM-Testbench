@@ -1,0 +1,28 @@
+`include "uvm_macros.svh"
+import uvm_pkg::*;
+ 
+module tb;
+ 
+initial begin
+  `uvm_info("TB_TOP", "This is Informative message", UVM_MEDIUM)
+   #10;
+  `uvm_warning("TB_TOP", "This is Warning")
+   #10;
+  `uvm_error("TB_TOP", "This is error")
+   #10;
+  `uvm_fatal("TB_TOP", "This is fatal error, stopping simulation")
+end
+ 
+ 
+ 
+endmodule
+
+====================================================================================
+-------------------------------- OUTPUT -------------------------------------------
+====================================================================================
+
+UVM_INFO testbench.sv(7) @ 0: reporter [TB_TOP] This is Informative message //blue color
+UVM_WARNING testbench.sv(9) @ 10: reporter [TB_TOP] This is Warning //yellow color
+UVM_ERROR testbench.sv(11) @ 20: reporter [TB_TOP] This is error //red color
+UVM_FATAL testbench.sv(13) @ 30: reporter [TB_TOP] This is fatal error, stopping simulation //red color
+UVM_INFO /apps/vcsmx/vcs/S-2021.09//etc/uvm-1.2/src/base/uvm_report_server.svh(904) @ 30: reporter [UVM/REPORT/SERVER] 
