@@ -1,0 +1,16 @@
+`include "uvm_macros.svh"
+import uvm_pkg::*;
+ 
+module tb;
+ 
+initial begin
+  `uvm_info("TB_TOP", "MOHAN SARDAR: STARTED LEARNING Universal Verification Methodologies (UVM)", UVM_MEDIUM);//id, msg , verbosity
+end
+
+endmodule
+
+====================================================================================
+-------------------------------- OUTPUT -------------------------------------------
+====================================================================================
+
+UVM_INFO testbench.sv(7) @ 0: reporter [TB_TOP] MOHAN SARDAR: STARTED LEARNING Universal Verification Methodologies (UVM)
