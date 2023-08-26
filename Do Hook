@@ -1,0 +1,53 @@
+// inbuild_implementation: do hook
+
+`include "uvm_macros.svh"
+import uvm_pkg::*;
+
+class transaction extends uvm_sequence_item;
+
+  `uvm_object_utils(transaction)
+
+rand bit [3:0]data;
+
+function new(string inst = "transaction");
+super.new(inst);
+endfunction
+
+virtual function void do_print(uvm_printer printer);
+  super.do_print(printer);
+  printer.print_field("data0", data, $bits(data), UVM_DEC);    
+endfunction
+endclass
+
+
+module tb;
+transaction t;
+
+initial begin
+  t = new("t");
+
+  t.randomize();
+  t.print(uvm_default_table_printer); 
+
+/*
+options available:
+
+uvm_default_tree_printer
+uvm_default_line_printer
+uvm_default_table_printer
+
+*/
+
+end
+
+endmodule
+
+====================================================================================
+-------------------------------- OUTPUT -------------------------------------------
+====================================================================================
+
+---------------------------------
+Name     Type         Size  Value
+---------------------------------
+t        transaction  -     @336 
+  data0  integral     4     9    
