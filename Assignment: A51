@@ -1,0 +1,45 @@
+//Create class extending uvm_object base class consisting of three data members (reg [3:0] a, reg [7:0] b, reg [15:0] c). Use the Random number facility of SV to generate a random number for b and c. Finally, print the value of all the data members on the Console.
+
+`include "uvm_macros.svh"
+import uvm_pkg::*;
+
+class temp extends uvm_object;
+  bit [3:0] a;
+  rand bit [3:0] b;
+  rand bit [3:0] c;
+  
+  function new(string inst = "temp");
+    super.new(inst);
+  endfunction
+  
+  `uvm_object_utils_begin(temp)
+  `uvm_field_int(a, UVM_DEFAULT)
+  `uvm_field_int(b, UVM_DEFAULT)
+  `uvm_field_int(c, UVM_DEFAULT)
+  `uvm_object_utils_end
+  
+endclass
+
+module tb;
+temp t;
+
+initial begin
+  t = temp :: type_id :: create("t");
+  t.randomize();
+  t.print();
+end
+
+endmodule
+
+====================================================================================
+-------------------------------- OUTPUT -------------------------------------------
+====================================================================================
+
+---------------------------
+Name  Type      Size  Value
+---------------------------
+t     temp      -     @336 
+  a   integral  4     'h0  
+  b   integral  4     'h9  
+  c   integral  4     'hc  
+---------------------------
