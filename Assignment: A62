@@ -1,0 +1,79 @@
+`include "uvm_macros.svh"
+import uvm_pkg::*;
+
+class comp_b extends uvm_component;
+  
+  `uvm_component_utils(comp_b)
+  
+  function new(string inst = "comp_b", uvm_component parent = null);
+    super.new(inst, parent);
+  endfunction
+  
+  virtual function void build_phase(uvm_phase phase);
+    super.build_phase(phase);
+    `uvm_info("comp_b", "BUILD PHASE EXECUTED", UVM_NONE);
+  endfunction
+  
+endclass
+
+class comp_c extends uvm_component;
+  
+  `uvm_component_utils(comp_c)
+  
+  function new(string inst = "comp_c", uvm_component parent = null);
+    super.new(inst, parent);
+  endfunction
+  
+  virtual function void build_phase(uvm_phase phase);
+    super.build_phase(phase);
+    `uvm_info("comp_c", "BUILD PHASE EXECUTED", UVM_NONE);
+  endfunction
+
+endclass
+
+class comp_a extends uvm_component;
+    
+  `uvm_component_utils(comp_a)
+  
+  comp_b cb;
+  comp_c cc;
+  
+  function new(string inst = "comp_a", uvm_component parent = null);
+    super.new(inst, parent);
+  endfunction
+  
+  virtual function void build_phase(uvm_phase phase);
+    super.build_phase(phase);
+    cb = comp_b :: type_id :: create("cb", this);
+    cc = comp_c :: type_id :: create("cc", this);
+    `uvm_info("comp_a", "BUILD PHASE EXECUTED", UVM_NONE);
+  endfunction
+  
+ /*virtual  function void end_of_elaboration_phase(uvm_phase phase);
+    super.end_of_elaboration_phase(phase);
+    uvm_top.print_topology();
+ endfunction
+  */
+  
+endclass
+
+module tb;
+  
+  comp_a ca;
+  
+  initial begin
+    ca = comp_a :: type_id :: create("ca", null);
+    run_test("");
+  end
+  
+endmodule
+
+====================================================================================
+-------------------------------- OUTPUT -------------------------------------------
+====================================================================================
+
+UVM_INFO @ 0: reporter [RNTST] Running test ...
+UVM_INFO testbench.sv(49) @ 0: ca [comp_a] BUILD PHASE EXECUTED
+UVM_INFO testbench.sv(14) @ 0: ca.cb [comp_b] BUILD PHASE EXECUTED
+UVM_INFO testbench.sv(29) @ 0: ca.cc [comp_c] BUILD PHASE EXECUTED
+UVM_INFO /apps/vcsmx/vcs/S-2021.09//etc/uvm-1.2/src/base/uvm_report_server.svh(904) @ 0: reporter [UVM/REPORT/SERVER] 
