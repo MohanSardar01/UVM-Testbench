@@ -1,0 +1,40 @@
+`include "uvm_macros.svh"
+import uvm_pkg::*;
+
+//UVM COMPONENT
+class test extends uvm_test;
+  
+  `uvm_component_utils(test)
+  
+  function new(string inst = "test", uvm_component parent = null);
+    super.new(inst, parent);
+  endfunction
+
+//run phase
+virtual task run_phase(uvm_phase phase);
+    
+phase.raise_objection(this);
+     #10;
+    `uvm_info("test", "run phase executed", UVM_NONE);
+phase.drop_objection(this);
+  
+endtask
+
+endclass
+
+module tb;
+  
+initial begin
+  run_test("test");
+end
+  
+endmodule
+
+====================================================================================
+-------------------------------- OUTPUT -------------------------------------------
+====================================================================================
+
+UVM_INFO @ 0: reporter [RNTST] Running test test...
+UVM_INFO testbench.sv(18) @ 10: uvm_test_top [test] run phase executed
+UVM_INFO /apps/vcsmx/vcs/S-2021.09//etc/uvm-1.2/src/base/uvm_objection.svh(1276) @ 10: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+UVM_INFO /apps/vcsmx/vcs/S-2021.09//etc/uvm-1.2/src/base/uvm_report_server.svh(904) @ 10: reporter [UVM/REPORT/SERVER] 
