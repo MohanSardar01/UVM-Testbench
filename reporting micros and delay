@@ -1,0 +1,27 @@
+// Write UVM code to throw a warning at 50 nsec, error at 100 nsec, and forcefully stop the simulation at 200 nsec from testbench top.
+
+`include "uvm_macros.svh"
+import uvm_pkg::*;
+
+module tb;
+
+initial begin
+  `uvm_info("TB_TOP","Test Running ..",UVM_NONE);
+#50;
+  `uvm_warning("TB_TOP","Test is having problem");
+#50;
+  `uvm_error("TB_TOP", "Test Failed");
+#100;
+  `uvm_fatal("TB_TOP", "Test is having CRITICAL ISSUES, Stopping Simulation");
+end
+endmodule
+
+====================================================================================
+-------------------------------- OUTPUT -------------------------------------------
+====================================================================================
+
+UVM_INFO testbench.sv(9) @ 0: reporter [TB_TOP] Test Running ..
+UVM_WARNING testbench.sv(11) @ 50: reporter [TB_TOP] Test is having problem
+UVM_ERROR testbench.sv(13) @ 100: reporter [TB_TOP] Test Failed
+UVM_FATAL testbench.sv(15) @ 200: reporter [TB_TOP] Test is having CRITICAL ISSUES, Stopping Simulation
+UVM_INFO /apps/vcsmx/vcs/S-2021.09//etc/uvm-1.2/src/base/uvm_report_server.svh(904) @ 200: reporter [UVM/REPORT/SERVER] 
