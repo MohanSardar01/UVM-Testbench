@@ -1,0 +1,55 @@
+// inbuild implementation 
+
+// field macros
+
+`include "uvm_macros.svh"
+import uvm_pkg::*;
+
+class transaction extends uvm_sequence_item;
+
+rand bit [3:0]data;
+
+function new(string inst = "transaction");
+    super.new(inst);
+endfunction
+
+//field macros 
+ 
+  `uvm_object_utils_begin(transaction)
+  `uvm_field_int(data,UVM_DEFAULT | UVM_DEC)
+  `uvm_object_utils_end
+
+endclass
+
+module tb;
+transaction t;
+
+initial begin
+  t = new("t");
+
+  t.randomize();
+  t.print(uvm_default_table_printer); 
+
+/*
+printing options available:
+
+uvm_default_tree_printer
+uvm_default_line_printer
+uvm_default_table_printer
+
+*/
+
+end
+
+endmodule
+
+====================================================================================
+-------------------------------- OUTPUT -------------------------------------------
+====================================================================================
+
+--------------------------------
+Name    Type         Size  Value
+--------------------------------
+t       transaction  -     @336 
+  data  integral     4     9    
+--------------------------------
