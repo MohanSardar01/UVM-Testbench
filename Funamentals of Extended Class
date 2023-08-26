@@ -1,0 +1,51 @@
+`include "uvm_macros.svh"
+import uvm_pkg::*;
+
+class add;
+  bit [3:0] a;
+  bit [3:0] b;
+  bit [3:0] c;
+
+function new(bit [3:0] a, bit [3:0] b);
+this.a = a;
+this.b = b;
+this.c = a + b;
+endfunction
+
+endclass
+
+class mul extends add;
+  bit [3:0] p;
+  bit [3:0] q;
+  bit [3:0] r;
+
+function new(bit [3:0] p, bit [3:0] q);
+super.new(p,q);
+this.r = p * q;
+endfunction
+
+endclass
+
+module tb;
+mul t;
+int a, m;
+
+initial begin
+  t = new(4'b0001, 4'b1000);
+a = t.c;
+m = t.r;
+  $display("The result of addition = %0d, mult = %0d",a,m);
+end
+endmodule
+
+====================================================================================
+-------------------------------- OUTPUT -------------------------------------------
+====================================================================================
+
+# UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(277) @ 0: reporter [Questa UVM] QUESTA_UVM-1.2.3
+# UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(278) @ 0: reporter [Questa UVM]  questa_uvm::init(+struct)
+# The result of addition = 9, mult = 8
+# exit
+# End time: 05:31:11 on Aug 26,2023, Elapsed time: 0:00:07
+# Errors: 0, Warnings: 2
+Done
